@@ -1,11 +1,10 @@
 = About Badgeable
 
-Badgeable is an elegant DSL for awarding badges
+This is a fork of the badgeable gem, authored by Scott Burton.
 
 == Overview
 
-Badgeable provides an elegant DSL for describing and awarding badges
-to your Ruby objects.
+This version of Badgeable has been configured for use with ActiveRecord and Mongoid adapters have been removed.
 
 == Usage
 
@@ -14,9 +13,8 @@ configuration directive required for each badge is the name of the badge
 and the name constant of the awarding class:
 
   class Person
-    include Mongoid::Document
     include Badgeable::Subject
-    embeds_many :nachos
+    has_many :nachos
   end
 
   badge "Nacho Nacho Man" do
@@ -32,9 +30,8 @@ would award the "Nacho Nacho Man" badge to each Person who eats 40
 nachos, and the last one was spicy.
 
   class Person
-    include Mongoid::Document
     include Badgeable::Subject
-    references_many :meals
+    has_many :meals
   end
 
   badge "Fancy Pants" do
@@ -71,7 +68,6 @@ in Rails.root/lib/badges.rb
 == Requirements
 
 === Supported ORMs
-* Mongoid
 * ActiveRecord
 
 = License
