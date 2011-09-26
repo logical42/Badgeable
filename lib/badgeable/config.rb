@@ -30,15 +30,24 @@ module Badgeable
     end
     
     def count(n = 1, &block)
+      print n
       if block_given?
         count_proc = Proc.new { |instance|
           block.call(instance)
         }
       else
+        print 'd'
         count_proc = Proc.new { |instance|
+          print instance
+          print klass
+          print %Q{
+            #{klass}.where(:#{@subject_name}_id => #{@subject_name}.id).count >= #{n}
+          }
+          print @subject_name
           instance.instance_eval %Q{
             #{klass}.where(:#{@subject_name}_id => #{@subject_name}.id).count >= #{n}
           }
+         
         }
       end
       @conditions_array << count_proc
@@ -46,6 +55,7 @@ module Badgeable
     
     def thing(klass)
       @klass = klass
+      print 'monkey'
     end
     
     def conditions(&block)

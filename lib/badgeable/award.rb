@@ -28,15 +28,31 @@ module Badgeable
     # See README for usage examples
     # 
     def badge(name, options = {}, &block)
+      #AK this is where the main action happens
+      #AK badge method was called and the block after badge "gold medal" do
+      #AK is passed in
       after_callback = options[:after] || :create
-      config = Badgeable::Config.new
-      config.instance_eval(&block)
+      
+      config = Badgeable::Config.new #ak create a new config object
+      config.instance_eval(&block) #ak pass in the block in badge
+                                   #ak sets up the klass attribute, the subject_proc
+                                   #ak all the main machinery which will be called later
       attrs = [:description, :icon].inject({}) {|hash, key| hash.merge(key => config.send(key)) }
       method_name = "award_#{name.titleize.gsub(/\s/, '').underscore}_badge".to_sym
-      config.klass.class_eval do
+      config.klass.class_eval do #ak creates an instance method!!! 
+                                 #ak in class klass, which is the model specified in 
+                                 #ak thing Model
         set_callback after_callback, :after, method_name
-        define_method method_name, Proc.new {
-          if config.conditions_array.all? {|p| p.call(self) }
+        define_method method_name, Proc.new { 
+          # print self
+          # print 'monkey'
+          # print config.conditions_array[1].call(self)
+          if config.conditions_array.all? {|p| p.call(self) } #ak calls each condition
+                                                              #ak first is always true line 11 of config
+                                                              #ak second is count block
+                                                              #ak next are the conditions block
+                                                              
+            print 'here'
             config.subject_proc.call(self).award_badge(name, attrs)
           end
         }

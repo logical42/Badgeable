@@ -18,7 +18,7 @@ module Badgeable
     end
     
     def self.included(receiver)
-      Badgeable::Adapters.connect(receiver)
+      #Badgeable::Adapters.connect(receiver)
     end
   end
 end
