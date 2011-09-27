@@ -1,4 +1,4 @@
-require 'generators/badge'
+require 'generators/badgeable'
 require 'rails/generators'
 require 'rails/generators/migration'
 
