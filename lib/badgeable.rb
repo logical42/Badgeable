@@ -24,6 +24,6 @@ module Badgeable
   autoload :Verson,       'badgeable/version'
 end
 
-require 'badgeable/railtie' if defined?(Rails)
+# require 'badgeable/railtie' if defined?(Rails)
 
 module Badgeable; end
