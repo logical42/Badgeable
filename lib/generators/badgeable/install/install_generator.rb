@@ -2,7 +2,7 @@ require 'generators/badgeable'
 require 'rails/generators'
 require 'rails/generators/migration'
 
-module Badge
+module Badgeable
   module Generators
     class InstallGenerator < Base
       include Rails::Generators::Migration
